@@ -338,57 +338,181 @@
       .catch(function () { return 0; });
   }
 
-  function renderAdminToast(info, today, yesterday) {
+  var KNOWN_POSTS = [
+    { slug: 'home', title: '🏠 메인 페이지 (koreapicks.co.kr)', url: '/index.html' },
+    { slug: 'shokz-openrun-pro-2-nike-initiator-review', title: '🎧 샥즈 오픈런 프로 2 단일 리뷰 (Shokz OpenRun Pro 2)', url: '/posts/shokz-openrun-pro-2-nike-initiator-review.html' },
+    { slug: 'haan-bedding-vacuum-braun-thermoscan-review', title: '🛏️ 한경희 UV 침구청소기 단일 리뷰 (Haan UV Bedding Vacuum)', url: '/posts/haan-bedding-vacuum-braun-thermoscan-review.html' },
+    { slug: 'korea-local-travel-ulsan-heritage-busan-packing-guide', title: '✈️ 울산 동헌 & 내아 로컬 여행 가이드 (Ulsan Dongheon Guide)', url: '/posts/korea-local-travel-ulsan-heritage-busan-packing-guide.html' },
+    { slug: 'arocell-super-collagen-mask-centellian24-madeca-cream-review', title: '✨ 아로셀 슈퍼 콜라겐 마스크 2.0 리뷰 (Arocell 43g Mask)', url: '/posts/arocell-super-collagen-mask-centellian24-madeca-cream-review.html' },
+    { slug: 'top-5-korean-wellness-daily-energy-picks-amazon', title: '🍵 한국 6년근 홍삼·보양 파우치 리뷰 (Red Ginseng Pouches)', url: '/posts/top-5-korean-wellness-daily-energy-picks-amazon.html' }
+  ];
+
+  function renderAdminToast(info, today, yesterday, openByDefault) {
     var sKey = shortSlug(info.slug);
-    Promise.all([
-      getKey('day__' + yesterday + '__' + sKey),
-      getKey('day__' + today + '__' + sKey),
-      getKey('total__' + sKey),
-      getKey('day__' + yesterday + '__all_site'),
-      getKey('day__' + today + '__all_site'),
-      getKey('total__all_site')
-    ]).then(function (vals) {
-      var bar = document.createElement('div');
-      bar.id = 'kpicks-admin-toast';
-      bar.style.cssText = [
-        'position:fixed',
-        'top:12px',
-        'left:50%',
-        'transform:translateX(-50%)',
+
+    function mountBanner() {
+      var existing = document.getElementById('kpicks-admin-toast');
+      if (existing) existing.remove();
+
+      var wrap = document.createElement('div');
+      wrap.id = 'kpicks-admin-toast';
+      wrap.style.cssText = [
+        'position:sticky',
+        'top:0',
+        'left:0',
+        'width:100%',
         'z-index:999999',
-        'background:rgba(15,23,42,0.96)',
-        'color:#f8fafc',
-        'padding:10px 18px',
-        'border-radius:999px',
-        'font-family:-apple-system,BlinkMacSystemFont,sans-serif',
-        'font-size:13px',
-        'font-weight:600',
-        'box-shadow:0 10px 25px rgba(0,0,0,0.35)',
-        'border:1px solid rgba(245,158,11,0.6)',
-        'display:flex',
-        'align-items:center',
-        'gap:12px',
-        'max-width:94vw',
-        'white-space:nowrap',
-        'overflow-x:auto'
+        'background:linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+        'color:#F8FAFC',
+        'border-bottom:3px solid #F59E0B',
+        'box-shadow:0 8px 24px rgba(0,0,0,0.4)',
+        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
+        'box-sizing:border-box'
       ].join(';');
 
-      bar.innerHTML =
-        '<span>🔒 <strong>KOREA PICKS 관리자 모드 (조회수 & 댓글 삭제 활성)</strong></span>' +
-        '<span style="color:#cbd5e1;">|</span>' +
-        '<span>현재 페이지: 어제 <strong style="color:#fbbf24;">' + vals[0] + '</strong> · 오늘 <strong style="color:#38bdf8;">' + vals[1] + '</strong> · 누적 <strong>' + vals[2] + '</strong></span>' +
-        '<span style="color:#cbd5e1;">|</span>' +
-        '<span>사이트 전체: 어제 <strong style="color:#fbbf24;">' + vals[3] + '</strong> · 오늘 <strong style="color:#38bdf8;">' + vals[4] + '</strong> · 누적 <strong>' + vals[5] + '</strong></span>' +
-        '<button type="button" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:14px;padding:0 4px;" onclick="this.parentElement.remove()">✕</button>';
+      wrap.innerHTML =
+        '<div style="max-width:1180px;margin:0 auto;padding:12px 16px;">' +
+          '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">' +
+            '<button type="button" id="kpicks-admin-toggle-btn" style="background:#F59E0B;color:#0F172A;border:none;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(245,158,11,0.4);">' +
+              '<span>📊 KOREA PICKS 관리자 조회수 대시보드</span>' +
+              '<span id="kpicks-admin-arrow">' + (openByDefault ? '▲ 접기' : '▼ 글별 상세 열기') + '</span>' +
+            '</button>' +
+            '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:13px;font-weight:700;">' +
+              '<span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);">' +
+                '🌐 사이트 전체: 어제 <strong id="kp-adm-site-y" style="color:#FBBF24;">...</strong> · 오늘 <strong id="kp-adm-site-t" style="color:#38BDF8;">...</strong> · 누적 <strong id="kp-adm-site-all" style="color:#4ADE80;">...</strong>' +
+              '</span>' +
+              '<span style="background:rgba(255,255,255,0.08);padding:5px 11px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);">' +
+                '📄 현재 페이지: 어제 <strong id="kp-adm-cur-y" style="color:#FBBF24;">...</strong> · 오늘 <strong id="kp-adm-cur-t" style="color:#38BDF8;">...</strong> · 누적 <strong id="kp-adm-cur-all" style="color:#4ADE80;">...</strong>' +
+              '</span>' +
+              '<button type="button" id="kpicks-admin-refresh-btn" style="background:#334155;color:#F8FAFC;border:1px solid #64748B;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;">🔄 새로고침</button>' +
+              '<button type="button" id="kpicks-admin-exit-btn" style="background:rgba(239,68,68,0.2);color:#FCA5A5;border:1px solid rgba(239,68,68,0.5);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;">✕ 관리자 끄기</button>' +
+            '</div>' +
+          '</div>' +
+          '<div id="kpicks-admin-drawer" style="display:' + (openByDefault ? 'block' : 'none') + ';margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.15);">' +
+            '<div style="font-size:12px;color:#CBD5E1;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">' +
+              '<span>📌 <strong>글별 실시간 조회수 현황</strong> (한국시간 기준: 어제 ' + yesterday + ' / 오늘 ' + today + ')</span>' +
+              '<span style="color:#FBBF24;">※ 관리자 모드에서는 내 방문이 조회수에 중복 합산되지 않습니다.</span>' +
+            '</div>' +
+            '<div style="overflow-x:auto;background:#0F172A;border:1px solid #334155;border-radius:10px;">' +
+              '<table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left;">' +
+                '<thead>' +
+                  '<tr style="background:#1E293B;color:#94A3B8;border-bottom:1px solid #334155;">' +
+                    '<th style="padding:9px 12px;">페이지 / 글 제목</th>' +
+                    '<th style="padding:9px 12px;text-align:center;width:80px;">어제</th>' +
+                    '<th style="padding:9px 12px;text-align:center;width:80px;">오늘</th>' +
+                    '<th style="padding:9px 12px;text-align:center;width:90px;">누적</th>' +
+                  '</tr>' +
+                '</thead>' +
+                '<tbody id="kpicks-admin-table-body">' +
+                  '<tr><td colspan="4" style="padding:14px;text-align:center;color:#94A3B8;">실시간 조회수 불러오는 중...</td></tr>' +
+                '</tbody>' +
+              '</table>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
 
-      if (document.body) {
-        document.body.appendChild(bar);
-      } else {
-        document.addEventListener('DOMContentLoaded', function () {
-          document.body.appendChild(bar);
+      document.body.insertBefore(wrap, document.body.firstChild);
+
+      var toggleBtn = document.getElementById('kpicks-admin-toggle-btn');
+      var drawer = document.getElementById('kpicks-admin-drawer');
+      var arrow = document.getElementById('kpicks-admin-arrow');
+      if (toggleBtn && drawer) {
+        toggleBtn.addEventListener('click', function () {
+          var isHidden = drawer.style.display === 'none';
+          drawer.style.display = isHidden ? 'block' : 'none';
+          if (arrow) arrow.textContent = isHidden ? '▲ 접기' : '▼ 글별 상세 열기';
+          if (isHidden) loadDetailedTable();
         });
       }
-    });
+
+      var refreshBtn = document.getElementById('kpicks-admin-refresh-btn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+          loadTopCounts();
+          if (drawer && drawer.style.display !== 'none') loadDetailedTable();
+        });
+      }
+
+      var exitBtn = document.getElementById('kpicks-admin-exit-btn');
+      if (exitBtn) {
+        exitBtn.addEventListener('click', function () {
+          try { localStorage.removeItem('kpicks_admin_pin'); } catch (e) {}
+          wrap.remove();
+          try {
+            var u = new URL(window.location.href);
+            u.searchParams.delete('admin');
+            window.history.replaceState({}, '', u.pathname + u.search);
+          } catch (e) {}
+        });
+      }
+
+      function loadTopCounts() {
+        Promise.all([
+          getKey('day__' + yesterday + '__' + sKey),
+          getKey('day__' + today + '__' + sKey),
+          getKey('total__' + sKey),
+          getKey('day__' + yesterday + '__all_site'),
+          getKey('day__' + today + '__all_site'),
+          getKey('total__all_site')
+        ]).then(function (vals) {
+          var elCurY = document.getElementById('kp-adm-cur-y');
+          var elCurT = document.getElementById('kp-adm-cur-t');
+          var elCurAll = document.getElementById('kp-adm-cur-all');
+          var elSiteY = document.getElementById('kp-adm-site-y');
+          var elSiteT = document.getElementById('kp-adm-site-t');
+          var elSiteAll = document.getElementById('kp-adm-site-all');
+          if (elCurY) elCurY.textContent = vals[0] + '회';
+          if (elCurT) elCurT.textContent = vals[1] + '회';
+          if (elCurAll) elCurAll.textContent = vals[2] + '회';
+          if (elSiteY) elSiteY.textContent = vals[3] + '회';
+          if (elSiteT) elSiteT.textContent = vals[4] + '회';
+          if (elSiteAll) elSiteAll.textContent = vals[5] + '회';
+        });
+      }
+
+      function loadDetailedTable() {
+        var tbody = document.getElementById('kpicks-admin-table-body');
+        if (!tbody) return;
+        Promise.all(KNOWN_POSTS.map(function (item) {
+          var k = shortSlug(item.slug);
+          return Promise.all([
+            getKey('day__' + yesterday + '__' + k),
+            getKey('day__' + today + '__' + k),
+            getKey('total__' + k)
+          ]).then(function (v) {
+            return {
+              title: item.title,
+              url: item.url,
+              slug: item.slug,
+              y: v[0],
+              t: v[1],
+              total: v[2]
+            };
+          });
+        })).then(function (rows) {
+          tbody.innerHTML = rows.map(function (r) {
+            var isCurrent = (r.slug === info.slug);
+            return '<tr style="border-bottom:1px solid #1E293B;' + (isCurrent ? 'background:rgba(245,158,11,0.12);' : '') + '">' +
+              '<td style="padding:9px 12px;"><a href="' + r.url + '?admin=9616" style="color:#F8FAFC;text-decoration:none;font-weight:' + (isCurrent ? '800' : '600') + ';">' + r.title + (isCurrent ? ' <span style="color:#FBBF24;font-size:11px;">(현재 페이지)</span>' : '') + '</a></td>' +
+              '<td style="padding:9px 12px;text-align:center;color:#FBBF24;font-weight:700;">' + r.y + '</td>' +
+              '<td style="padding:9px 12px;text-align:center;color:#38BDF8;font-weight:800;">' + r.t + '</td>' +
+              '<td style="padding:9px 12px;text-align:center;color:#4ADE80;font-weight:800;">' + r.total + '</td>' +
+            '</tr>';
+          }).join('');
+        });
+      }
+
+      loadTopCounts();
+      if (openByDefault) {
+        loadDetailedTable();
+      }
+    }
+
+    if (document.body) {
+      mountBanner();
+    } else {
+      document.addEventListener('DOMContentLoaded', mountBanner);
+    }
   }
 
   /* ==========================================================================
@@ -1025,8 +1149,8 @@
     var yesterday = getKstDateString(-1);
     var sKey = shortSlug(info.slug);
 
-    if (params.get('admin') === '9616') {
-      renderAdminToast(info, today, yesterday);
+    if (isAdminMode(params)) {
+      renderAdminToast(info, today, yesterday, params.get('admin') === '9616');
       return;
     }
 
