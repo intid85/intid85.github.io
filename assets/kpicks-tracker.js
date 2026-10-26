@@ -125,7 +125,33 @@
     var tabBtns = document.querySelectorAll('[data-cat-filter]');
     if (!tabBtns.length) return;
 
-    function filterByCategory(cat) {
+    var categoryMeta = {
+      all: {
+        title: 'Latest Single-Topic Reviews & Local Guides',
+        sub: 'One product or destination per post — filter by category to explore our hands-on tests.'
+      },
+      kbeauty: {
+        title: '✨ K-Beauty & Skincare Reviews',
+        sub: 'Hands-on consumer tests of Korean hydrogel masks, cica creams, and glass-skin essentials.'
+      },
+      gear: {
+        title: '🏠 Tech, Home & Running Gear Reviews',
+        sub: 'Real-world tests of Korean apartment hygiene appliances and Han River running gear.'
+      },
+      travel: {
+        title: '✈️ Korea Local Travel & Packing Guides',
+        sub: 'Authentic KTX itineraries, Joseon heritage walks, and smart Korea packing essentials.'
+      },
+      wellness: {
+        title: '🍵 K-Food & Daily Wellness Reviews',
+        sub: 'Traditional Korean 6-year red ginseng pouches and caffeine-free daily vitality tonics.'
+      }
+    };
+
+    function filterByCategory(cat, fromTopNav) {
+      cat = (cat || 'all').toLowerCase();
+      if (!categoryMeta[cat]) cat = 'all';
+
       for (var i = 0; i < tabBtns.length; i++) {
         var btnCat = tabBtns[i].getAttribute('data-cat-filter');
         if (btnCat === cat) {
@@ -133,6 +159,20 @@
         } else {
           tabBtns[i].classList.remove('active');
         }
+      }
+
+      var heroEl = document.querySelector('.editorial-hero');
+      if (heroEl) {
+        heroEl.style.display = (cat === 'all') ? '' : 'none';
+      }
+
+      var headingEl = document.querySelector('#latest-reviews .section-heading');
+      var subheadingEl = document.querySelector('#latest-reviews .section-subheading');
+      if (headingEl && categoryMeta[cat]) {
+        headingEl.textContent = categoryMeta[cat].title;
+      }
+      if (subheadingEl && categoryMeta[cat]) {
+        subheadingEl.textContent = categoryMeta[cat].sub;
       }
 
       var cards = document.querySelectorAll('[data-category]');
@@ -144,15 +184,49 @@
           cards[j].style.display = 'none';
         }
       }
+
+      try {
+        var url = new URL(window.location.href);
+        if (cat === 'all') {
+          url.searchParams.delete('cat');
+        } else {
+          url.searchParams.set('cat', cat);
+        }
+        window.history.replaceState({}, '', url.pathname + url.search);
+      } catch (e) {}
+
+      if (fromTopNav) {
+        if (cat !== 'all') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          var targetEl = document.getElementById('latest-reviews');
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
     }
 
     for (var i = 0; i < tabBtns.length; i++) {
       tabBtns[i].addEventListener('click', function (e) {
-        e.preventDefault();
         var cat = this.getAttribute('data-cat-filter') || 'all';
-        filterByCategory(cat);
+        var cards = document.querySelectorAll('[data-category]');
+        if (!cards.length) {
+          return; // On article pages, follow the href to ../index.html?cat=...
+        }
+        e.preventDefault();
+        var isTopNav = Boolean(this.closest && this.closest('.header-nav'));
+        filterByCategory(cat, isTopNav);
       });
     }
+
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var initialCat = params.get('cat');
+      if (initialCat && categoryMeta[initialCat.toLowerCase()]) {
+        filterByCategory(initialCat.toLowerCase(), false);
+      }
+    } catch (e) {}
   }
 
   /* ==========================================================================
@@ -609,7 +683,7 @@
 
         '<form class="dct-form-card" id="dct-comment-form" novalidate>' +
           '<div class="dct-form-title">' +
-            '<span>✍️ Leave a Reader Review or Ask our Seoul &amp; Pyeongtaek Editors</span>' +
+            '<span>✍️ Leave a Reader Review or Ask our Seoul Editors</span>' +
             '<span class="dct-no-login-tag">⚡ Instant Post · No Sign-Up Required</span>' +
           '</div>' +
 
@@ -672,7 +746,7 @@
           '</div>' +
 
           '<div class="dct-form-footer">' +
-            '<span class="dct-form-note">🔒 Published immediately · Curated by the KOREA PICKS Editorial Team in Seoul &amp; Pyeongtaek</span>' +
+            '<span class="dct-form-note">🔒 Published immediately · Curated by the KOREA PICKS Editorial Team in Seoul</span>' +
             '<button type="submit" class="dct-submit-btn" id="dct-submit-btn">Post Review / Question →</button>' +
           '</div>' +
           '<div class="dct-status-msg" id="dct-status-msg" role="status"></div>' +
