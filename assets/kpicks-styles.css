@@ -1,0 +1,1320 @@
+/* ==========================================================================
+ * KOREA PICKS (K-Picks Insider) — Editorial Magazine & Review Stylesheet
+ * Inspired by Wirecutter, The Strategist & Gear Patrol
+ * Pure B2C Editorial Reviews, Korea Travel Guides & Affiliate Curation
+ * ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-paper: #FAF8F5;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  --ink-900: #0F172A;
+  --ink-700: #334155;
+  --ink-500: #64748B;
+  --ink-400: #94A3B8;
+  --border-light: #E2E8F0;
+  --border-warm: #E6DFD3;
+  --brand-red: #D9381E;
+  --brand-red-dark: #B52B14;
+  --brand-gold: #B45309;
+  --amz-orange: #FF9900;
+  --amz-dark: #131921;
+  --amz-btn-bg: #F59E0B;
+  --amz-btn-hover: #D97706;
+  --trip-blue: #2563EB;
+  --trip-blue-hover: #1D4ED8;
+  --klook-orange: #FF5B00;
+  --klook-orange-hover: #E04F00;
+  --agoda-purple: #5B21B6;
+  --agoda-purple-hover: #4C1D95;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 18px 40px -8px rgba(15, 23, 42, 0.12);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-paper);
+  color: var(--ink-900);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.article-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+ * Top Insider Disclosure & Utility Bar
+ * ========================================================================== */
+.top-disclosure-bar {
+  background: var(--ink-900);
+  color: #E2E8F0;
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.top-disclosure-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.top-location-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #FBBF24;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.top-affiliate-note {
+  color: #CBD5E1;
+}
+
+/* ==========================================================================
+ * Editorial Header & Masthead
+ * ========================================================================== */
+.site-header {
+  background: rgba(250, 248, 245, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-warm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  gap: 20px;
+}
+
+.brand-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-logo-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.95rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink-900);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo-badge {
+  background: var(--brand-red);
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.brand-logo-sub {
+  font-size: 0.76rem;
+  color: var(--ink-500);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-700);
+  padding: 8px 13px;
+  border-radius: 999px;
+  transition: all 0.15s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  background: var(--ink-900);
+  color: #FFFFFF;
+}
+
+.nav-link-amazon {
+  background: var(--amz-dark);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 153, 0, 0.5);
+}
+
+.nav-link-amazon:hover {
+  background: #232F3E;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+ * Hero Editorial Section
+ * ========================================================================== */
+.editorial-hero {
+  padding: 36px 0 28px;
+  border-bottom: 1px solid var(--border-warm);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hero-feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-img-wrap {
+  position: relative;
+  height: 350px;
+  background: #F8FAFC;
+  overflow: hidden;
+}
+
+.hero-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.hero-feature-card:hover .hero-img-wrap img {
+  transform: scale(1.02);
+}
+
+.hero-tag-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge-cat {
+  background: rgba(15, 23, 42, 0.9);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.badge-editor-pick {
+  background: var(--brand-red);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.hero-content {
+  padding: 26px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.hero-kicker {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-red);
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink-900);
+  margin: 0 0 12px;
+}
+
+.hero-excerpt {
+  font-size: 0.96rem;
+  color: var(--ink-700);
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+
+.hero-cta-row {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Sidebar Insider Box in Hero */
+.hero-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.insider-manifesto-card {
+  background: linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.manifesto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.18);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.manifesto-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.manifesto-text {
+  font-size: 0.86rem;
+  color: #CBD5E1;
+  margin: 0 0 16px;
+  line-height: 1.55;
+}
+
+.manifesto-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FBBF24;
+}
+
+.stat-item span {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+/* Travel Quick Toolkit Card in Hero */
+.travel-toolkit-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-card);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.toolkit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.toolkit-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  margin: 0;
+}
+
+.toolkit-sub {
+  font-size: 0.82rem;
+  color: var(--ink-500);
+  margin: 0 0 14px;
+  line-height: 1.45;
+}
+
+.toolkit-btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ==========================================================================
+ * Buttons (Amazon, Trip.com, Klook, Agoda, Editorial)
+ * ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  border: none;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.btn-editorial {
+  background: var(--ink-900);
+  color: #FFFFFF;
+}
+
+.btn-editorial:hover {
+  background: #1E293B;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  color: var(--ink-900);
+  border: 1.5px solid #CBD5E1;
+}
+
+.btn-outline:hover {
+  border-color: var(--ink-900);
+  background: #F8FAFC;
+}
+
+.btn-amazon {
+  background: linear-gradient(180deg, #FBBF24 0%, #F59E0B 100%);
+  color: #0F172A;
+  border: 1px solid #D97706;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.btn-amazon:hover {
+  background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.btn-amazon-dark {
+  background: var(--amz-dark);
+  color: #FFFFFF;
+  border: 1px solid #374151;
+}
+
+.btn-amazon-dark:hover {
+  background: #232F3E;
+  border-color: var(--amz-orange);
+  transform: translateY(-1px);
+}
+
+.btn-trip {
+  background: var(--trip-blue);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
+}
+
+.btn-trip:hover {
+  background: var(--trip-blue-hover);
+  transform: translateY(-1px);
+}
+
+.btn-klook {
+  background: var(--klook-orange);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(255, 91, 0, 0.22);
+}
+
+.btn-klook:hover {
+  background: var(--klook-orange-hover);
+  transform: translateY(-1px);
+}
+
+.btn-agoda {
+  background: var(--agoda-purple);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(91, 33, 182, 0.22);
+}
+
+.btn-agoda:hover {
+  background: var(--agoda-purple-hover);
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  font-size: 0.78rem;
+  padding: 8px 13px;
+}
+
+/* ==========================================================================
+ * Interactive Category Filter Bar
+ * ========================================================================== */
+.category-filter-section {
+  padding: 28px 0 18px;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.section-heading {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.section-subheading {
+  font-size: 0.9rem;
+  color: var(--ink-500);
+  margin: 4px 0 0;
+}
+
+.category-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.cat-tab-btn {
+  background: #FFFFFF;
+  color: var(--ink-700);
+  border: 1.5px solid var(--border-warm);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cat-tab-btn:hover {
+  border-color: var(--ink-900);
+  color: var(--ink-900);
+}
+
+.cat-tab-btn.active {
+  background: var(--ink-900);
+  color: #FFFFFF;
+  border-color: var(--ink-900);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.16);
+}
+
+/* ==========================================================================
+ * Magazine Article Grid (Homepage)
+ * ========================================================================== */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 44px;
+}
+
+.article-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.article-card-media {
+  position: relative;
+  height: 220px;
+  background: #F8FAFC;
+  overflow: hidden;
+}
+
+.article-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover .article-card-media img {
+  transform: scale(1.03);
+}
+
+.article-card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.rating-pill {
+  background: rgba(15, 23, 42, 0.88);
+  color: #FBBF24;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.article-card-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.article-meta-line {
+  font-size: 0.75rem;
+  color: var(--ink-500);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-card-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.32rem;
+  font-weight: 700;
+  line-height: 1.26;
+  color: var(--ink-900);
+  margin: 0 0 10px;
+}
+
+.article-card-title a:hover {
+  color: var(--brand-red);
+}
+
+.article-card-desc {
+  font-size: 0.88rem;
+  color: var(--ink-700);
+  margin: 0 0 18px;
+  line-height: 1.55;
+}
+
+.article-card-actions {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.article-action-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.article-action-row .btn {
+  flex: 1 1 auto;
+}
+
+/* ==========================================================================
+ * Quick-Buy Top Amazon Picks Bar
+ * ========================================================================== */
+.quick-picks-section {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border-warm);
+  border-bottom: 1px solid var(--border-warm);
+  padding: 38px 0 42px;
+  margin-bottom: 44px;
+}
+
+.quick-picks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.quick-pick-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.quick-pick-img {
+  height: 145px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #F8FAFC;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.quick-pick-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quick-pick-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--brand-red);
+  margin-bottom: 3px;
+}
+
+.quick-pick-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.quick-pick-verdict {
+  font-size: 0.78rem;
+  color: var(--ink-500);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.quick-pick-card .btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ==========================================================================
+ * Single Review / Article Post Styles
+ * ========================================================================== */
+.post-header {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border-warm);
+  margin-bottom: 28px;
+}
+
+.post-breadcrumb {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-500);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.post-breadcrumb a {
+  color: var(--brand-red);
+}
+
+.post-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 2.45rem;
+  font-weight: 700;
+  line-height: 1.16;
+  color: var(--ink-900);
+  margin: 0 0 14px;
+}
+
+.post-subtitle {
+  font-size: 1.1rem;
+  color: var(--ink-700);
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+.post-byline-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  color: var(--ink-500);
+}
+
+.byline-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink-900);
+  color: #FBBF24;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.affiliate-inline-disclosure {
+  background: #F8FAFC;
+  border-left: 3px solid var(--amz-btn-bg);
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  color: var(--ink-500);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 24px;
+}
+
+/* Quick Verdict / Top Picks Box inside Post */
+.verdict-summary-box {
+  background: #FFFFFF;
+  border: 2px solid var(--ink-900);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  margin: 24px 0 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.verdict-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 18px;
+}
+
+.verdict-badge {
+  background: var(--brand-red);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+
+.verdict-score {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--ink-900);
+}
+
+.verdict-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.verdict-product-item {
+  background: var(--bg-paper);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.verdict-product-top {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.verdict-product-top img {
+  width: 84px;
+  height: 84px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.verdict-product-info h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+  color: var(--ink-900);
+}
+
+.verdict-product-info p {
+  font-size: 0.82rem;
+  color: var(--ink-700);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Article Typography & Photos */
+.article-body h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin: 36px 0 14px;
+  line-height: 1.25;
+}
+
+.article-body h3 {
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  margin: 26px 0 10px;
+}
+
+.article-body p {
+  font-size: 1.02rem;
+  color: var(--ink-700);
+  margin: 0 0 18px;
+  line-height: 1.75;
+}
+
+.article-body ul, .article-body ol {
+  margin: 0 0 20px;
+  padding-left: 22px;
+  color: var(--ink-700);
+}
+
+.article-body li {
+  margin-bottom: 8px;
+  line-height: 1.65;
+}
+
+.photo-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.photo-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 290px;
+  object-fit: cover;
+}
+
+.photo-caption {
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: var(--ink-500);
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Pros & Cons Grid */
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.pros-box, .cons-box {
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.pros-box {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+}
+
+.cons-box {
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+}
+
+.pros-box h4 {
+  color: #065F46;
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.cons-box h4 {
+  color: #9F1239;
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.pros-box ul, .cons-box ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+}
+
+/* Comparison Spec Table */
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin: 26px 0 32px;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-card);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  min-width: 600px;
+}
+
+.comparison-table th {
+  background: var(--ink-900);
+  color: #FFFFFF;
+  font-weight: 800;
+  text-align: left;
+  padding: 13px 16px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.comparison-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--ink-700);
+  vertical-align: middle;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tr:nth-child(even) td {
+  background: #FAF8F5;
+}
+
+/* Travel Booking Hub Box inside Post */
+.travel-booking-hub {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  margin: 30px 0;
+  box-shadow: var(--shadow-card);
+}
+
+.travel-booking-hub h3 {
+  color: #FFFFFF;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.55rem;
+  margin: 0 0 8px;
+}
+
+.travel-booking-hub p {
+  color: #CBD5E1;
+  font-size: 0.9rem;
+  margin: 0 0 18px;
+}
+
+.travel-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.travel-app-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.travel-app-card h4 {
+  margin: 0;
+  font-size: 0.96rem;
+  color: #FFFFFF;
+}
+
+.travel-app-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+}
+
+.travel-app-card .btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--ink-900);
+  color: #CBD5E1;
+  padding: 48px 0 36px;
+  margin-top: 60px;
+  border-top: 3px solid var(--brand-red);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-brand-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 10px;
+}
+
+.footer-desc {
+  font-size: 0.86rem;
+  color: #94A3B8;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.footer-disclosure-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.78rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+.footer-col h4 {
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 14px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 0.85rem;
+}
+
+.footer-links a {
+  color: #94A3B8;
+  transition: color 0.15s ease;
+}
+
+.footer-links a:hover {
+  color: #FFFFFF;
+}
+
+.footer-bottom {
+  padding-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: #64748B;
+}
+
+/* ==========================================================================
+ * Responsive Mobile Optimization
+ * ========================================================================== */
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .articles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .quick-picks-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .travel-apps-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container, .article-container {
+    padding: 0 16px;
+  }
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .hero-img-wrap {
+    height: 230px;
+  }
+  .hero-content {
+    padding: 18px 18px 20px;
+  }
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .articles-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .quick-picks-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .quick-pick-card {
+    padding: 10px;
+  }
+  .quick-pick-img {
+    height: 110px;
+  }
+  .quick-pick-name {
+    font-size: 0.82rem;
+  }
+  .quick-pick-verdict {
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+  }
+  .post-title {
+    font-size: 1.75rem;
+  }
+  .verdict-products-grid, .photo-showcase-grid, .pros-cons-grid {
+    grid-template-columns: 1fr;
+  }
+  .photo-card img {
+    height: 230px;
+  }
+}
