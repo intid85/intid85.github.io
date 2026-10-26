@@ -365,7 +365,10 @@
     { slug: 'haan-bedding-vacuum-braun-thermoscan-review', title: '🛏️ 한경희 UV 침구청소기 단일 리뷰 (Haan UV Bedding Vacuum)', url: '/posts/haan-bedding-vacuum-braun-thermoscan-review.html' },
     { slug: 'korea-local-travel-ulsan-heritage-busan-packing-guide', title: '✈️ 울산 동헌 & 내아 로컬 여행 가이드 (Ulsan Dongheon Guide)', url: '/posts/korea-local-travel-ulsan-heritage-busan-packing-guide.html' },
     { slug: 'arocell-super-collagen-mask-centellian24-madeca-cream-review', title: '✨ 아로셀 슈퍼 콜라겐 마스크 2.0 리뷰 (Arocell 43g Mask)', url: '/posts/arocell-super-collagen-mask-centellian24-madeca-cream-review.html' },
-    { slug: 'top-5-korean-wellness-daily-energy-picks-amazon', title: '🍵 한국 6년근 홍삼·보양 파우치 리뷰 (Red Ginseng Pouches)', url: '/posts/top-5-korean-wellness-daily-energy-picks-amazon.html' }
+    { slug: 'top-5-korean-wellness-daily-energy-picks-amazon', title: '🍵 한국 6년근 홍삼·보양 파우치 리뷰 (Red Ginseng Pouches)', url: '/posts/top-5-korean-wellness-daily-energy-picks-amazon.html' },
+    { slug: 'iope-super-vital-cream-6th-gen-review', title: '✨ 아이오페 슈퍼바이탈 크림 6세대 리뷰 (IOPE Super Vital Cream)', url: '/posts/iope-super-vital-cream-6th-gen-review.html' },
+    { slug: 'melkin-rx8-smart-treadmill-review', title: '🏃 멜킨 스마트 런닝머신 RX8 리뷰 (Melkin RX8 Treadmill)', url: '/posts/melkin-rx8-smart-treadmill-review.html' },
+    { slug: 'anmyeondo-jurassic-museum-taean-guide', title: '🦖 태안 안면도 쥬라기박물관 가이드 (Anmyeondo Jurassic Museum)', url: '/posts/anmyeondo-jurassic-museum-taean-guide.html' }
   ];
 
   function renderAdminToast(info, today, yesterday, openByDefault) {
